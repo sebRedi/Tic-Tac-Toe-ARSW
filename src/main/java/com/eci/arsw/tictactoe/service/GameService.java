@@ -3,7 +3,11 @@ package com.eci.arsw.tictactoe.service;
 import com.eci.arsw.tictactoe.model.Board;
 import com.eci.arsw.tictactoe.model.GameState;
 import com.eci.arsw.tictactoe.model.Move;
+import com.eci.arsw.tictactoe.model.Room;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class GameService {
@@ -11,6 +15,8 @@ public class GameService {
     private char next = 'X';
     private Character winner = null;
     private boolean draw = false;
+
+    private List<Room> roomList = new ArrayList<Room>();
 
     private static final int[][] WINS = {
             {0,1,2},{3,4,5},{6,7,8},
@@ -52,5 +58,22 @@ public class GameService {
         boolean anyEmpty=false;
         for (char cell : board.getCells()) if (cell=='\0') { anyEmpty=true; break; }
         draw = !anyEmpty && winner==null;
+    }
+
+    // Crear una sala
+    public synchronized GameState createRoom( String password ){
+        roomList.add(new Room(password , roomList.size()-1));
+
+        /**
+        if (move.getPlayer() != next) return state();
+        int idx = move.getIndex();
+        if (idx < 0 || idx > 8 || !board.isEmptyAt(idx)) return state();
+
+        board.place(idx, move.getPlayer());
+        checkWinnerOrDraw();
+        if (winner == null && !draw) next = (next=='X') ? 'O' : 'X';
+        return state();
+         */
+        return state();
     }
 }

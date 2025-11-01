@@ -20,4 +20,8 @@ public class GameController {
 
     @PostMapping(value = "/reset", produces = MediaType.APPLICATION_JSON_VALUE)
     public GameState reset(){ return service.reset(); }
+
+    // Crear una sala
+    @PostMapping(value = "/createRoom", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public GameState createRoom(String password){ return service.createRoom(password); }
 }
